@@ -1,0 +1,92 @@
+{
+  "_comment": "StarCynic Skip Configuration Template",
+  "_instructions": "Copy this file to config.json and customize your settings",
+  
+  "hotword": "Skip",
+  
+  "llm": {
+    "_comment": "Local LLM configuration (FREE!)",
+    "ollama_url": "http://localhost:11434",
+    "local_model": "llama3.1:8b",
+    
+    "_comment_cloud": "Optional cloud LLM fallback (costs money)",
+    "cloud_fallback": {
+      "enabled": false,
+      "provider": "openai",
+      "api_key": "ENV:OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "endpoint": ""
+    }
+  },
+  
+  "tts": {
+    "_comment": "Text-to-Speech configuration",
+    "engine": "edge",
+    
+    "_comment_voices": "EdgeTTS voices (FREE!). Popular options:",
+    "_voice_options": [
+      "en-US-GuyNeural (masculine, confident)",
+      "en-US-DavisNeural (young male)",
+      "en-GB-RyanNeural (British male)",
+      "en-AU-WilliamNeural (Australian male)",
+      "en-US-AriaNeural (female, clear)",
+      "en-US-JennyNeural (female, friendly)"
+    ],
+    "voice": "en-US-GuyNeural",
+    "rate": "+10%",
+    "volume": "+0%",
+    "pitch": "+0Hz",
+    
+    "_comment_cloud": "Optional cloud TTS (costs money)",
+    "cloud_tts": {
+      "enabled": false,
+      "provider": "elevenlabs",
+      "api_key": "ENV:ELEVENLABS_API_KEY", 
+      "voice_id": "replace_with_voice_id"
+    }
+  },
+  
+  "modes": {
+    "default_tone": "balanced",
+    "default_roast_prob": 40,
+    "pg13": true,
+    "max_response_length": 180,
+    "serious_mode_duration": 60
+  },
+  
+  "audio": {
+    "enable_sound_effects": false,
+    "volume": 0.8,
+    "fade_in_duration": 0.1,
+    "fade_out_duration": 0.1
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "log_interactions": true,
+    "log_performance": true,
+    "max_log_size_mb": 10
+  },
+  
+  "performance": {
+    "llm_timeout_seconds": 10,
+    "tts_timeout_seconds": 15,
+    "max_queue_size": 5,
+    "response_delay_seconds": 0.5
+  },
+  
+  "_setup_instructions": {
+    "step_1": "Install Ollama from https://ollama.ai",
+    "step_2": "Run: ollama pull llama3.1:8b",
+    "step_3": "Start Ollama: ollama serve",
+    "step_4": "Copy this file to config.json",
+    "step_5": "Customize voice and settings above",
+    "step_6": "Enable StarCynic skill in Wingman",
+    "step_7": "Say 'Skip, how do I land?' to test"
+  },
+  
+  "_voice_samples": {
+    "test_command": "Skip, test your voice",
+    "edge_tts_test": "edge-tts --voice en-US-GuyNeural --text 'Testing Skip voice' --write-media test.mp3"
+  }
+}
