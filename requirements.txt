@@ -1,0 +1,7 @@
+# Core dependencies for StarCynic Skip
+edge-tts>=6.1.9
+pygame>=2.5.0
+requests>=2.31.0
+
+# Optional for development
+asyncio-mqtt>=0.13.0
