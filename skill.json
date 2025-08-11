@@ -1,0 +1,165 @@
+{
+  "name": "StarCynic - Skip Edition",
+  "description": "Sarcastic but helpful AI copilot for Star Citizen with context-aware roasting",
+  "version": "1.0.0",
+  "author": "Community",
+  "license": "MIT",
+  "tags": ["star-citizen", "starhead", "roleplay", "sarcastic", "copilot"],
+  
+  "skill_config": {
+    "module": "starcynic",
+    "class": "WingmanStarCynicSkill",
+    "hotwords": ["Skip", "skip"],
+    "activation_phrases": [
+      "Skip",
+      "Hey Skip",
+      "Skip, {command}",
+      "{command}, Skip"
+    ]
+  },
+  
+  "intents": {
+    "user_help": {
+      "description": "User asking for help or guidance",
+      "patterns": [
+        "how do I {action}",
+        "where can I {action}",
+        "what is {object}",
+        "help me with {topic}",
+        "how to {action}",
+        "{action} help"
+      ],
+      "slots": {
+        "action": ["land", "quantum jump", "refuel", "eva", "buy", "sell", "trade", "mine"],
+        "object": ["ship", "weapon", "component", "commodity"],
+        "topic": ["landing", "quantum travel", "combat", "trading", "mining"]
+      }
+    },
+    
+    "user_comeback": {
+      "description": "User responding to Skip's roast",
+      "patterns": [
+        "give me a break",
+        "come on",
+        "shut up",
+        "that's not fair",
+        "whatever",
+        "shut it",
+        "enough"
+      ],
+      "slots": {
+        "type": ["break", "unfair", "shutup", "whatever"]
+      }
+    },
+    
+    "mode_toggle": {
+      "description": "Toggle Skip's response mode",
+      "patterns": [
+        "be serious",
+        "serious mode",
+        "stop roasting",
+        "roast mode",
+        "be sarcastic",
+        "tone down",
+        "softer"
+      ],
+      "slots": {
+        "mode": ["serious", "roast", "softer"],
+        "duration": [30, 60, 120, 300]
+      }
+    },
+    
+    "repeat_last": {
+      "description": "Repeat last response",
+      "patterns": [
+        "say that again",
+        "repeat",
+        "what did you say",
+        "come again"
+      ]
+    }
+  },
+  
+  "events": {
+    "starhead_death": {
+      "description": "Player died in game",
+      "source": "starhead",
+      "event_type": "player_death",
+      "auto_respond": true,
+      "response_delay": 2.0
+    },
+    
+    "starhead_quantum_start": {
+      "description": "Quantum jump started",
+      "source": "starhead",
+      "event_type": "quantum_start",
+      "auto_respond": false
+    },
+    
+    "starhead_quantum_complete": {
+      "description": "Quantum jump completed",
+      "source": "starhead", 
+      "event_type": "quantum_complete",
+      "auto_respond": false
+    },
+    
+    "starhead_eva_start": {
+      "description": "EVA started",
+      "source": "starhead",
+      "event_type": "eva_start",
+      "auto_respond": true,
+      "response_delay": 1.0
+    },
+    
+    "starhead_cargo_loss": {
+      "description": "Cargo lost/destroyed",
+      "source": "starhead",
+      "event_type": "cargo_loss",
+      "auto_respond": true,
+      "response_delay": 3.0
+    },
+    
+    "starhead_crime_stat": {
+      "description": "Crime stat gained/cleared",
+      "source": "starhead",
+      "event_type": "crime_stat",
+      "auto_respond": true,
+      "response_delay": 2.0
+    }
+  },
+  
+  "dependencies": {
+    "python_packages": [
+      "edge-tts>=6.1.9",
+      "pygame>=2.5.0",
+      "requests>=2.31.0"
+    ],
+    "system_requirements": [
+      "Internet connection for EdgeTTS",
+      "Audio output device",
+      "Ollama (optional, for local LLM)"
+    ],
+    "wingman_skills": ["StarHead"],
+    "recommended_memory": "2GB",
+    "recommended_cpu": "Any modern CPU"
+  },
+  
+  "configuration": {
+    "config_file": "config.json",
+    "config_template": "config_template.json",
+    "user_configurable": [
+      "llm.local_model",
+      "tts.voice", 
+      "tts.rate",
+      "modes.default_roast_prob",
+      "hotword"
+    ]
+  },
+  
+  "permissions": {
+    "network": "required",
+    "audio_output": "required", 
+    "file_system": "limited",
+    "starhead_events": "required"
+  }
+}
